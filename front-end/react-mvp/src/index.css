@@ -1,0 +1,110 @@
+@font-face {
+    font-family: Diablo;
+    src: url('DIABLO_L.TTF');
+  }
+
+body{
+    background-image: url('D2 Background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Diablo;
+}
+
+.container {
+    height: 80em;
+    overflow:scroll;
+    overflow-x:hidden;
+    overflow-y: auto;
+    text-align: -webkit-center;
+}
+
+.titleBar{
+    color: aliceblue;
+    font-size: 75px;
+    text-align: center;
+}
+
+.favButton{
+    margin: 30px;
+    height: 40px;
+    width: 180px;
+    color: rgb(6, 5, 5);
+    font-weight: bolder;
+    line-height: 25px; 
+    border-radius: 15px; 
+    background-image: url('buttonBackground.jpg');
+    border: 2px solid rgb(95, 101, 111); 
+    display: inline-block;
+    font-family: Diablo;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.classButton {
+    background-color: transparent;
+    margin: 30px;
+    border: 2px solid rgb(95, 101, 111);
+}
+
+#showFav{
+    padding-bottom: 45px;
+    position: relative;
+    top: -145px;
+    margin-left: 95px;
+}
+
+.classButton:hover{
+    scale: 1.07;
+}
+
+button:hover{
+    scale: 1.07;
+}
+
+.buttons {
+    text-align: center;
+    margin: 30px;
+    font-family: Diablo;
+}
+
+.allCards {
+    display: inline-flex;
+}
+
+.charTile{
+    color:aliceblue;
+    border: 8px ridge #BCCBCE;
+    background-color: rgba(0, 0, 0, 0.9);
+    /* width: 500px;
+    height: 300px; */
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 500px;
+    height: 655px;
+    justify-content: center;
+    align-items: center;
+    font-family: Diablo;
+}
+
+.favoritesList{
+    color:aliceblue;
+    height: 300px;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 8px ridge #BCCBCE;
+    position: absolute;
+    right: 250px;
+    top: 510px;
+}
+
+ul{
+    text-align: left;
+}
+
+.buildTitle{
+    text-align: center;
+    font-size: 40px;
+    font-family: Diablo;
+}
