@@ -3,14 +3,17 @@ import Buttons from "./Buttons";
 import Character from "./Character";
 import FavoritesList from "./FavoritesList";
 import Titlebar from "./Titlebar";
+import {Howl} from 'howler'
+import DiabloTheme from './PageMusic.mp3'
 
 const App = () => {
   const [data, setData] = useState([])
   const [favorites, setFavorite] = useState([])
   const [updated, setUpdated] = useState(0)
-  // const [selectedFav, setSelectedFav] = useState(props.characters.character_type)
+  
 
-  useEffect(() => {getAllFavorites()}, [updated])
+//useEffect runs on render, and populates the favorited builds list on the favortes window on each render, so it dynamically updates when you update the state.
+useEffect(() => {getAllFavorites()}, [updated])
 
 //fetch request for all builds
   const getAllData = () => {
@@ -25,7 +28,7 @@ const App = () => {
         console.error(error)
       })
   }
-
+//funtion to update state to re-render page; drilled down to character compnonent and called inside the set and remove favorite functions
   const updateFavorites = () => {
     setUpdated(updated + 1)
   }
@@ -50,6 +53,7 @@ const App = () => {
         (result) => {
           console.log(result)
           setData(result)
+          setUpdated()
         })
       .catch(error => {
         console.error(error)
@@ -108,12 +112,19 @@ const App = () => {
       })
   }
 
+  const pageMusic = new Howl ({
+    src: DiabloTheme,
+    html5: true,
+    volume: .2
+  })
+
   return (
     <>
       <Titlebar />
+      <p className='welcome'>Welcome to the Diablo II Sets page. Click below on a base class to see popular build choices and common gear sets. You can favorite a build by clicking on the button and populate it to your favorites list to reference again later</p>
       <Buttons getAllData={getAllData} getAmazonData={getAmazonData} getPaladinData={getPaladinData} getSorceressData={getSorceressData} getBarbarianData={getBarbarianData} getAllFavorites={getAllFavoritesData}/>
       <div className="allCards">
-        {data.map(characters => <Character key={characters.character_id} characters={characters} updateFavorites={updateFavorites} />)}
+        {data.map(characters => <Character key={characters.character_id} characters={characters} updateFavorites={updateFavorites} getAllFavoritesData={getAllFavoritesData} />)}
       </div>
       <FavoritesList data={favorites} />
     </>

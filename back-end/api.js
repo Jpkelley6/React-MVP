@@ -26,20 +26,6 @@ app.get('/api/characters', (req, res) => {
         })
 })
 
-//gets all favorites
-app.get('/api/allfavorites', (req, res) => {
-    client.query("SELECT * FROM favorites")
-        .then(results => {
-            if (results.rows.length === 0) {
-                res.status(404)
-            }
-            res.send(results.rows)
-        })
-        .catch(error => {
-            console.error(error)
-        })
-})
-
 //gets all amazon builds
 app.get('/api/characters/amazon', (req, res) => {
     client.query("SELECT * FROM characters WHERE character_class = 'Amazon'")

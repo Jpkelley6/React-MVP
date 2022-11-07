@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import {Howl} from 'howler'
+import D2Click from './select.wav'
+import swal from 'sweetalert'
 
 //Character tile component. Recieves data from App via prop drilling and appends character build tiles to the page based on which class button was clicked from button components
 //uses event listener functions on the buttons to add and remove a favorites tag
@@ -24,7 +27,7 @@ const Character = (props) => {
     )
       .then((results) => {
         if (results.status === 201){
-          alert('Added build to favorites')
+          swal('Added build to favorites')
         }
       })
       .then(() => {
@@ -35,7 +38,7 @@ const Character = (props) => {
         console.log(error);
       });
   };
-  //function to remove favorite tag from build
+  //function to remove favorite tag from build (turns "yes" to "no" in the table)
   const removeFavorite = () => {
     let update = {
       character_type: props.characters.character_type,
@@ -54,17 +57,24 @@ const Character = (props) => {
     )
       .then((results) => {
         if (results.status === 201){
-          alert('Removed build favorites')
+          swal('Removed build from favorites')
         }
       })
       .then(() => {
         updateFavorite('No')
         props.updateFavorites()
+        props.getAllFavoritesData()
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  const cursorClick = new Howl ({
+    src: D2Click,
+    html5: true,
+    volume: .2
+  })
 
   return (
     <>
@@ -83,9 +93,9 @@ const Character = (props) => {
         <li>Boots: {props.characters.boots}</li>
       </ul>
       {favorite === "No" ? (
-        <button className="favButton" onClick={setFavorite}>Add to favorites</button>
+        <button className="favButton" onClick={() => {setFavorite(); cursorClick.play()}}>Add to favorites</button>
       ) : (
-        <button className="favButton" onClick={removeFavorite}>Remove favorite</button>
+        <button className="favButton" onClick={() => {removeFavorite(); cursorClick.play()}}>Remove favorite</button>
       )}
     </div>
     </>
